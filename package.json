@@ -1,0 +1,25 @@
+{
+  "name": "js-playwright-practice-2026",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+      "test": "playwright test",
+      "test-ui": "playwright test --ui"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anastasia-ivanova/js-playwright-practice-2026.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anastasia-ivanova/js-playwright-practice-2026/issues"
+  },
+  "homepage": "https://github.com/anastasia-ivanova/js-playwright-practice-2026#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.6.0"
+  }
+}
