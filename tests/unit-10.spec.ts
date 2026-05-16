@@ -1,17 +1,35 @@
 import { test, expect } from '@playwright/test';
+import { loginInfo } from './test-data';
+import { LoginPage } from '../pages/login.page';
+import { AccountPage } from '../pages/account.page';
+import { HomePage } from '../pages/home.page';
+import { ProductPage } from '../pages/product.page';
 
-test('Unit 10 - first test', async ({ page }) => {
-    await test.step('go to login page', async step => {
-        await page.goto('auth/login')
+test('Unit 11 - first test with page objects', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    const accountPage = new AccountPage(page);
+
+    await loginPage.goTo();
+    await loginPage.login(loginInfo.email, loginInfo.password);
+
+    await test.step('make final checks', async () => {
+        await expect(page).toHaveURL('/account');
+        await expect(accountPage.pageTitle).toContainText('My account');
+        await expect(accountPage.navMenu).toContainText(loginInfo.name);
     });
-    await test.step('Fill login info and press login', async step => {
-        await page.getByTestId('email').fill('customer@practicesoftwaretesting.com');
-        await page.getByTestId('password').fill('welcome01');
-        await page.getByTestId('login-submit').click()
-    });
-    await test.step('make final checks', async step => {
-        await expect(page).toHaveURL('https://practicesoftwaretesting.com/account');
-        await expect(page.getByTestId('page-title')).toContainText('My account');
-        await expect(page.getByTestId('nav-menu')).toContainText('Jane Doe');
-    });
+});
+
+test('Unit 11 - Test 2: Verify user can view product details', async ({ page }) => {
+    const productName = 'Combination Pliers';
+    const expectedProductPrice = '14.15';
+
+    const homePage = new HomePage(page);
+    const productPage = new ProductPage(page);
+
+    await homePage.goTo();
+    await homePage.clickOnProductCard(productName);
+
+    await expect(page).toHaveURL(/\/product\/.+/);
+    await expect(productPage.productName).toContainText(productName);
+    await expect(productPage.productPrice).toContainText(expectedProductPrice);
 });
