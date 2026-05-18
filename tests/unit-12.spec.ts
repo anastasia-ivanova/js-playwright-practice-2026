@@ -86,8 +86,9 @@ test(`Unit 12 - Test 6: Verify user can perform filtering by category`, async ({
 
     await homePage.goTo();
     await homePage.selectPowerToolsCategory(PowerTools.Sander);
+    await expect(homePage.productCard.first()).toContainText('Sander') //adding this as a waiter
     const results = await homePage.productCard.allInnerTexts();
     expect(results.every(name => name.includes('Sander'))).toBe(true);
-
 });
+
 
