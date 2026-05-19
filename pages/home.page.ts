@@ -27,6 +27,7 @@ export class HomePage{
         await test.step('Select sorting option as: ' + sortingType, async () => {
             await this.sortDropdown.selectOption(sortingType);
         })
+        await this.waitForProductsPageUpdate();    
     }
 
     async goTo(): Promise<void>{
@@ -36,16 +37,22 @@ export class HomePage{
     }
 
     async selectPowerToolsCategory(category:PowerTools): Promise<void>{
-        const responsePromise = this.page.waitForResponse(response =>
-        response.url().includes('products?page=0&between=price,1,100&by_category=') &&
-        response.status() === 200
-        );
+        
 
         await test.step('Select filtering option as: ' + category, async () => {
             await this.page.getByLabel(category).check(); 
             });
-        await responsePromise;
+        await this.waitForProductsPageUpdate();    
+        
     }
+
+    async waitForProductsPageUpdate(): Promise<void> {
+    await this.page.waitForResponse(response =>
+        response.url().includes('/products') &&
+        response.request().method() === 'GET' &&
+        response.status() === 200
+    );
+}
 
     
 }
