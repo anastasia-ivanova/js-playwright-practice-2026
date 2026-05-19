@@ -18,9 +18,9 @@ export class LoginPage{
 
     async login(email:string, password:string): Promise<void> {
         await test.step('Fill login info and press login', async () => {
-            await this.page.getByTestId('email').fill(email);
-            await this.page.getByTestId('password').fill(password);
-            await this.page.getByTestId('login-submit').click();
+            await this.emailInput.fill(email);
+            await this.passwordInput.fill(password);
+            await this.loginButton.click();
         });
 
     }

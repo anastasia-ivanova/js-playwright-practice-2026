@@ -1,16 +1,14 @@
 import { test, expect } from '@playwright/test';
-import { loginInfo } from './test-data';
-import { LoginPage } from '../pages/login.page';
+import { loginInfo } from './test-data/login-info';
 import { AccountPage } from '../pages/account.page';
 import { HomePage } from '../pages/home.page';
 import { ProductPage } from '../pages/product.page';
 
-test('Unit 11 - first test with page objects', async ({ page }) => {
-    const loginPage = new LoginPage(page);
+test('Unit 13 - first test with page objects', async ({ page }) => {
     const accountPage = new AccountPage(page);
 
-    await loginPage.goTo();
-    await loginPage.login(loginInfo.email, loginInfo.password);
+    //skip Login
+    await page.goto('/account');
 
     await test.step('make final checks', async () => {
         await expect(page).toHaveURL('/account');
@@ -33,3 +31,4 @@ test('Unit 11 - Test 2: Verify user can view product details', async ({ page }) 
     await expect(productPage.productName).toContainText(productName);
     await expect(productPage.productPrice).toContainText(expectedProductPrice);
 });
+
