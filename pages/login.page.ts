@@ -1,4 +1,5 @@
 import { Page, test, Locator } from "@playwright/test";
+import { expect } from "@playwright/test";
 
 export class LoginPage{
     private page: Page;
@@ -21,6 +22,7 @@ export class LoginPage{
             await this.emailInput.fill(email);
             await this.passwordInput.fill(password);
             await this.loginButton.click();
+            await expect(this.page).toHaveURL('/account');
         });
 
     }

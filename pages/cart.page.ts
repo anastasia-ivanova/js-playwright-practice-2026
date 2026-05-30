@@ -5,6 +5,7 @@ export class CartPage{
 
     readonly productInTheCartCell: Locator;
     readonly proceedToCheckoutButton: Locator;
+    readonly productPriceCell: Locator;
      
 
 
@@ -13,6 +14,7 @@ export class CartPage{
         
         this.proceedToCheckoutButton = page.getByTestId('proceed-1');
         this.productInTheCartCell = page.getByTestId('product-title');
+        this.productPriceCell = page.getByTestId('line-price');
     }
 
     async clickProceedToCheckout(): Promise<void> {
