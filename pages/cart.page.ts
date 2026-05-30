@@ -7,8 +7,6 @@ export class CartPage{
     readonly proceedToCheckoutButton: Locator;
     readonly productPriceCell: Locator;
      
-
-
     constructor(page: Page) {
         this.page = page;
         
@@ -21,6 +19,5 @@ export class CartPage{
         await test.step('Click on proceed to checkout: ', async () => {
             await this.proceedToCheckoutButton.click();
         });
-
     }
 }

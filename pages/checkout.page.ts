@@ -17,9 +17,6 @@ export class CheckoutPage{
     readonly proceedToCheckoutButton2: Locator;
     readonly proceedToPaymentButton3: Locator;
 
-
-
-
     readonly paymentMethodDropdown: Locator;
 
     readonly cardNumberInput: Locator;
@@ -28,12 +25,8 @@ export class CheckoutPage{
     readonly cardHolderNameInput: Locator;
     readonly finishButton: Locator;
 
-
     readonly paymentCompleteText: Locator;
     
-     
-
-
     constructor(page: Page) {
         this.page = page;
         
@@ -57,9 +50,6 @@ export class CheckoutPage{
         this.cvvInput = page.getByTestId('cvv');
         this.cardHolderNameInput = page.getByTestId('card_holder_name');
         this.finishButton = page.getByTestId('finish');
-
-
-
         this.paymentCompleteText = page.getByTestId('payment-success-message');
     }
 
@@ -85,7 +75,6 @@ export class CheckoutPage{
 async proceedToPayment(): Promise<void> {
 
     await test.step('Proceed to payment step', async () => {
-
         await this.proceedToPaymentButton3.click();
     });
 }
@@ -97,7 +86,6 @@ async selectPaymentMethod(paymentMethod: PaymentMethod): Promise<void> {
 async fillInPaymentInfo(paymentInfo: PaymentInfo): Promise<void> {
 
     await test.step('Fill payment information', async () => {
-
         await this.cardNumberInput.fill(paymentInfo.cardNumber);
         await this.expirationDateInput.fill(paymentInfo.expirationDate);
         await this.cvvInput.fill(paymentInfo.cvv);

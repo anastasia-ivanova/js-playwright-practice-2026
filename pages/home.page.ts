@@ -31,7 +31,6 @@ export class HomePage{
             const priceText = await this.productPrices
                 .nth(productNumber)
                 .innerText();
-
             return priceText.replace('$', '');
         }
     );
@@ -64,7 +63,5 @@ export class HomePage{
         response.request().method() === 'GET' &&
         response.status() === 200
     );
-}
-
-    
+}   
 }

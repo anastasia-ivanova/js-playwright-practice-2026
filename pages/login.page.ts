@@ -11,7 +11,6 @@ export class LoginPage{
     constructor(page: Page) {
         this.page = page;
 
-        // initialize locators once
         this.emailInput = page.getByTestId('email');
         this.passwordInput = page.getByTestId('password');
         this.loginButton = page.getByTestId('login-submit');
@@ -24,7 +23,6 @@ export class LoginPage{
             await this.loginButton.click();
             await expect(this.page).toHaveURL('/account');
         });
-
     }
 
     async goTo(){
