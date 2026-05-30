@@ -20,7 +20,20 @@ export class HomePage{
             await this.productCard
             .filter({ hasText: productName }).click();
         });
+    }
 
+    async getCleanProductPrice(productNumber: number): Promise<string> {
+
+    return await test.step(
+        `Return product price by card position: ${productNumber}`,
+        async () => {
+
+            const priceText = await this.productPrices
+                .nth(productNumber)
+                .innerText();
+            return priceText.replace('$', '');
+        }
+    );
     }
 
     async selectSortingType(sortingType:string): Promise<void> {
@@ -37,13 +50,11 @@ export class HomePage{
     }
 
     async selectPowerToolsCategory(category:PowerTools): Promise<void>{
-        
-
+    
         await test.step('Select filtering option as: ' + category, async () => {
             await this.page.getByLabel(category).check(); 
             });
-        await this.waitForProductsPageUpdate();    
-        
+        await this.waitForProductsPageUpdate();        
     }
 
     async waitForProductsPageUpdate(): Promise<void> {
@@ -52,7 +63,5 @@ export class HomePage{
         response.request().method() === 'GET' &&
         response.status() === 200
     );
-}
-
-    
+}   
 }

@@ -10,20 +10,15 @@ export class ProductPage{
    
     //header part
     readonly cartButton: Locator;
-     readonly cartQuality: Locator;
-
-    
+    readonly cartQuality: Locator;
 
     constructor(page: Page) {
         this.page = page;
 
-        // initialize locators once
         this.productName = page.getByTestId('product-name');
         this.productPrice = page.getByTestId('unit-price');
         this.addToCartButton = page.locator('[data-test="add-to-cart"]');
         this.productAddedMessage = page.getByRole('alert', { name: 'Product added to shopping' });
-        
-
         this.cartButton = page.locator('[data-test="nav-cart"]');
         this.cartQuality = page.locator('[data-test="cart-quantity"]');
 
@@ -40,7 +35,4 @@ export class ProductPage{
             await this.cartButton.click();
         })
     }
-
-
-    
 }
